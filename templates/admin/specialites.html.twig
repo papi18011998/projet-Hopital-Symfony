@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste de toutes les spécialités{% endblock %}
+{% block body %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id de la specialite</th>
+            <th>libelle de la specialite</th>
+            <th>Modification de la specialite</th>
+            <th>Suppression de la specialite</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for specialite in specialites %}
+        <tr>
+            <td scope="row">{{specialite.id}}</td>
+            <td>{{specialite.libelle}}</td>
+            <td>
+                 <a href="{{ path('editSpecialite',{'id':specialite.id}) }}" class="btn btn-secondary">Editer</a>
+             </td>
+            <td>
+                 <a href="{{ path('deleteSpecialite',{'id':specialite.id}) }}" class="btn btn-danger">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+ <center><a href="{{ path('newSpeciaite')}}" class="btn btn-success">Nouvelle Spécialité</a>
+{% endblock %}

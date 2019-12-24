@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste de tous les medecins{% endblock %}
+
+{% block body %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Matricule du medecin</th>
+                        <th>Prenom du medecin</th>
+                        <th>Nom du medecin</th>
+                        <th>Telephone du medecin</th>
+                        <th>Date de Naissance du medecin</th>
+                        <th>Service du medecin</th>
+                        <th>Modifier le medecin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for medecin in medecins%}
+                        <tr> 
+                            <td>
+                                {{ medecin.matricule }}
+                            </td>
+                            <td>
+                                {{ medecin.prenom }}
+                            </td>
+                             <td>
+                                {{ medecin.nom }}
+                            </td>
+                             <td>
+                                {{ medecin.tel }}
+                            </td>
+                             <td>
+                                {{ medecin.dateNaiss | date('d/m/Y')}}
+                            </td> 
+                             <td>
+                                {{ medecin.service.libelle}}
+                            </td>
+                            <td>
+                              <a name="" id="" class="btn btn-secondary" href="{{ path('editMedecin',{'id':medecin.id})}}">Editer</a>
+                            </td>
+                            <td>
+                              <a name="" id="" class="btn btn-danger" href="{{ path('deleteMedecin',{'id':medecin.id})}}">Supprimer</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <center><a href="{{ path('newMedecin')}}" class="btn btn-success">Nouveau Medecin</a>
+        {% endblock %}
+        {% block javascripts %}{% endblock %}

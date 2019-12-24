@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Liste de tous les services{% endblock %}</title>
+        {% block stylesheets %} <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">{% endblock %}
+    </head>
+    <body>
+        {% block menu %}
+                        <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #14bdee;">
+                <a class="navbar-brand" href="{{ path('showService') }}">Sama Hopital</a>
+                <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                    aria-expanded="false" aria-label="Toggle navigation"></button>
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('showService') }}">Liste des services<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('showMedecin') }}">Liste des medecins</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="{{ path('showSpecialite') }}">Liste des specialites</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </div>
+            </nav>
+        {% endblock %}
+        {% block body %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id du service</th>
+                        <th>Libelle du service</th>
+                        <th>Editer le service</th>
+                        <th>Supprimer le service</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for service in services%}
+                        <tr> 
+                            <td>
+                                {{ service.id }}
+                            </td>
+                            <td>
+                                {{ service.libelle }}
+                            </td>
+                             <td>
+                               <a href="{{ path('edit',{'id':service.id}) }}" class="btn btn-secondary">Editer</a>
+                            </td>
+                            <td>
+                               <a href="{{ path('delete',{'id':service.id}) }}" class="btn btn-danger">Supprimer</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <center><a href="{{ path('new')}}" class="btn btn-success">Nouveau Service</a>
+        {% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
